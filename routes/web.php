@@ -18,19 +18,25 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-//Routes for product_base Managment
+//user management
+$router->post('/signup','User\UsersController@createUsers');
+$router->post('/login','Auth\AuthController@login');
+
+
+//Routes for product_base Management
 $router->post('/product_base','Product_base_controller@store_product_base');
 $router->get('/product_base/{id}','Product_base_controller@show_by_id');
 $router->put('/product_base/{id}','Product_base_controller@updateProductBase');
 $router->put('/product_upadate/','Product_base_controller@updateProductWithItem');
 $router->delete('/deleteProd/{id}', 'Product_base_controller@deleteProductBase');
 //notyet
-$router->get('/product_baselist/', 'Product_base_controller@getProductList');
-$router->get('/product_baselist/{product_id}', 'Product_base_controller@getProduct');
+$router->group(['prefix' => '', ['middleware' => 'role:Supplier']], function () use ($router) {
+    $router->get('/product_baselist/', 'Product_base_controller@getProductList');
+    $router->get('/product_baselist/{product_id}', 'Product_base_controller@getProduct');
+});
 
 
-
-//Routes for product_item Managment
+//Routes for product_item Management
 $router->post('/product_item/','Product_item_controller\Product_item_controller@addItem');
 $router->post('/product_item_criteria/','Product_item_controller\Product_item_controller@addItemCriteria');
 $router->put('/updateItemCriteria/','Product_item_controller\Product_item_controller@updateItemCriteria');
@@ -39,14 +45,14 @@ $router->delete('/deleteItemCriteria/','Product_item_controller\Product_item_con
 $router->get('/product_item/{item_id}','Product_item_controller\Product_item_controller@getItem');
 $router->get('/product_itemlist/{product_id}','Product_item_controller\Product_item_controller@getProductItemList');
 $router->get('/generate/item/barcode/','Product_item_controller\Product_item_controller@generateBarcode');
-///****images managment
+///****images management
 $router->post('/image/','Product_item_controller\Product_item_controller@uploadImages');
 $router->delete('/image/{id}','Product_item_controller\Product_item_controller@deleteImage');
 
 
 
 
-//Routes for Category Managment
+//Routes for Category Management
 $router->post('/category','Category\Category_controller@addCategory');
 $router->get('/category','Category\Category_controller@getCategories');
 $router->get('/categorychild/{id}','Category\Category_controller@getCategoryChild');
@@ -80,11 +86,24 @@ $router->post('/brandup/','Brand_controller\Brand_controller@updateBrand');
 $router->delete('/brand/','Brand_controller\Brand_controller@deleteBrand');
 
 
+//test countries
+$router->get('/nationdetails/{nation}','CountriesControllerTest@get_nation');
+$router->get('/getzonefromcity/{city}/{nation}','CountriesControllerTest@getzonefromcity');
+$router->get('/listborders/{nation}','CountriesControllerTest@getborder_nation_details');
+$router->get('/getgeo/{nation}','CountriesControllerTest@get_geo_details_nation');
+$router->get('/getlatlng/{nation}','CountriesControllerTest@get_alt_long');
+$router->get('/getlatlng/{city}/{nation}','CountriesControllerTest@get_alt_long_from_city');
+$router->get('/all/','CountriesControllerTest@getborder');
 
 
+//catalog managmnt
+//$router->group(['prefix' => 'supplier', ['middleware' => 'role:Supplier']], function () use ($router) {
 
+    $router->get('/catalogimg/', 'CatalogImagesController\CatalogImagesController@get_images_by_user');
+    $router->delete('/catalogimg/', 'CatalogImagesController\CatalogImagesController@delete_images');
+    $router->post('/catalogimg/', 'CatalogImagesController\CatalogImagesController@uploadImages');
 
-
+//});
 
 
 

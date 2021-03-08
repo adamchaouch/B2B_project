@@ -21,5 +21,7 @@ class Product_base extends Model
     public function items() {
         return $this->hasMany(Product_item::class, 'product_base_id');
     }
-
+    public function supplier() {
+        return $this->belongsTo(User::class, 'supplier_id');
+    }
 }

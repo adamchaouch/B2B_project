@@ -24,7 +24,6 @@ $app = new Laravel\Lumen\Application(
 );
 $app->configure('filesystems');
 
-
 //class_alias('Illuminate\Support\Facades\Storage', 'Storage');
  $app->withFacades();
  $app->withEloquent();
@@ -76,6 +75,11 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 |
 */
 
+/*$app->middleware([
+    // ...
+    Fruitcake\Cors\HandleCors::class,
+]);*/
+
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
@@ -95,9 +99,11 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 |
 */
 $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
- $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

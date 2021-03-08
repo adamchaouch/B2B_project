@@ -25,6 +25,9 @@ class Category extends Model
 
     public function CriteriaBase() {
         return $this->belongsToMany(
-            Criteria_base::class,'categories_criteria','category_id','criteria_id');
+            Criteria_base::class,
+            'categories_criteria',
+            'category_id',
+            'criteria_id');
     }
 }
