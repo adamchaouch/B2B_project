@@ -27,7 +27,7 @@ class Category_controller extends Controller
             $category->category_fr = $request->input('category_fr');
             $category->parent_category_id = $request->input('parent_category_id');
             if ($request->hasFile('category_image')) {
-                $path = $request->file('category_image')->store('categories', 'google');
+                $path = $request->file('category_image')->store('categories', 'public');
                 $fileUrl = Storage::url($path);
                 $category->img_url = $fileUrl;
                // $user->img_name = basename($path);

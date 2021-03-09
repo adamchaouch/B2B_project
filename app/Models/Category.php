@@ -30,4 +30,12 @@ class Category extends Model
             'category_id',
             'criteria_id');
     }
+
+    public function user_group_categories() {
+        return $this->belongsToMany(
+            User::class,
+            'user_category',
+            'category_id',
+            'user_id');
+    }
 }

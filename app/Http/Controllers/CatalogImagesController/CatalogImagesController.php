@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CatalogImagesController;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 use App\Models\product_Images;
 use Illuminate\Http\Request;
@@ -11,9 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class CatalogImagesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function get_images_by_user(){
-        $supplier = AuthController::me();
-        $Images=product_Images::all()->where('user_id',$supplier->id)->orWhere('user_id',null);
+       // $supplier = AuthController::me();
+        $Images=product_Images::all();//->where('user_id',$supplier->id)->orWhere('user_id',null);
         return response()->json($Images);
     }
 

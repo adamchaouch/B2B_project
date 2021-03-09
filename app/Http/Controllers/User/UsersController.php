@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -59,6 +60,8 @@ class UsersController extends Controller
                 $user->img_url = $fileUrl;
                 $user->img_name = basename($path);
             }
+
+
             $role = Role::where('id', $request->role_id)->first();
 
             $role->users()->save($user);

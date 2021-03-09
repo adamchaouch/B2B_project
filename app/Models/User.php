@@ -119,4 +119,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password' => 'required|min:8',
     ];
 
+    public function user_group_categories() {
+        return $this->belongsToMany(
+            Category::class,
+            'user_category',
+            'category_id',
+            'user_id');
+    }
 }

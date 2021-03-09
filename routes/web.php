@@ -30,10 +30,9 @@ $router->put('/product_base/{id}','Product_base_controller@updateProductBase');
 $router->put('/product_upadate/','Product_base_controller@updateProductWithItem');
 $router->delete('/deleteProd/{id}', 'Product_base_controller@deleteProductBase');
 //notyet
-$router->group(['prefix' => '', ['middleware' => 'role:Supplier']], function () use ($router) {
     $router->get('/product_baselist/', 'Product_base_controller@getProductList');
     $router->get('/product_baselist/{product_id}', 'Product_base_controller@getProduct');
-});
+
 
 
 //Routes for product_item Management
@@ -97,15 +96,17 @@ $router->get('/all/','CountriesControllerTest@getborder');
 
 
 //catalog managmnt
-//$router->group(['prefix' => 'supplier', ['middleware' => 'role:Supplier']], function () use ($router) {
+$router->group(["middleware" => "role:supplier"], function () use ($router) {
 
     $router->get('/catalogimg/', 'CatalogImagesController\CatalogImagesController@get_images_by_user');
     $router->delete('/catalogimg/', 'CatalogImagesController\CatalogImagesController@delete_images');
     $router->post('/catalogimg/', 'CatalogImagesController\CatalogImagesController@uploadImages');
 
-//});
+});
 
-
+//usergroup management
+$router->get('/usergroup/', 'User_group\user_group_controller@get_users_by_group');
+$router->get('/cat_of_users/', 'User_group\user_group_controller@get_catego_of_users');
 
 
 

@@ -83,9 +83,9 @@ class AuthController extends Controller
 
         $email = JWTAuth::getPayload()->get('email');
 
-        $contact = JWTAuth::getPayload()->get('contact');
+        $contact = JWTAuth::getPayload()->get('phone_num1');
 
-        $user = User::where('email','=',$email)->where('contact', $contact)->first();
+        $user = User::where('email','=',$email)->where('phone_num1', $contact)->first();
         return $user;
     }
 
