@@ -38,4 +38,9 @@ class Category extends Model
             'category_id',
             'user_id');
     }
+
+    public function group() {
+        return $this->belongsTo(group::class, 'group_id');
+    }
+
 }

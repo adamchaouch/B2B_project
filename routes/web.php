@@ -105,8 +105,14 @@ $router->group(["middleware" => "role:supplier"], function () use ($router) {
 });
 
 //usergroup management
+
 $router->get('/usergroup/', 'User_group\user_group_controller@get_users_by_group');
 $router->get('/cat_of_users/', 'User_group\user_group_controller@get_catego_of_users');
+$router->get('/group/', 'User_group\user_group_controller@get_group_list');
+$router->post('/group/', 'User_group\user_group_controller@addgroup');
+//$router->put('/group/{id}', 'User_group\user_group_controller@addgroup');
+$router->delete('/group/{id}', 'User_group\user_group_controller@delete_group');
+$router->get('/group/{id}', 'User_group\user_group_controller@get_group_by_id');
 
 
 
