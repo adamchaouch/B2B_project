@@ -2,6 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 use App\Http\Controllers\Product_base_controller;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,13 +97,15 @@ $router->get('/all/','CountriesControllerTest@getborder');
 
 
 //catalog managmnt
-$router->group(["middleware" => "role:supplier"], function () use ($router) {
-
+//$router->group(["middleware" => "role:supplier"], function () use ($router) {
+$router->group(['prefix' => 'gallery'], function () use ($router) {
     $router->get('/catalogimg/', 'CatalogImagesController\CatalogImagesController@get_images_by_user');
     $router->delete('/catalogimg/', 'CatalogImagesController\CatalogImagesController@delete_images');
     $router->post('/catalogimg/', 'CatalogImagesController\CatalogImagesController@uploadImages');
-
 });
+
+
+//});
 
 //usergroup management
 
